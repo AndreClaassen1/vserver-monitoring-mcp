@@ -1,0 +1,56 @@
+# vServer Monitoring MCP server configuration
+# Copy this file to config.yaml and adjust the values
+
+server:
+  # SSH server details
+  host: "your-server.example.com"
+  port: 22
+  username: "your-username"
+
+  # Path to the SSH key (~ is expanded to the home directory)
+  ssh_key_path: "~/.ssh/id_ed25519"
+
+  # Optional: passphrase for the SSH key (if encrypted)
+  # ssh_key_passphrase: "your-passphrase"
+
+  # Connection timeout in seconds
+  timeout: 10
+
+monitoring:
+  # Log files to monitor
+  logs:
+    - path: "/var/log/syslog"
+      name: "syslog"
+      description: "System log with general system messages"
+
+    - path: "/var/log/auth.log"
+      name: "auth"
+      description: "Authentication and authorization log"
+
+    # Add more log files here
+    # - path: "/var/log/nginx/access.log"
+    #   name: "nginx-access"
+    #   description: "Nginx access log"
+    #
+    # - path: "/var/log/nginx/error.log"
+    #   name: "nginx-error"
+    #   description: "Nginx error log"
+
+  # Network monitoring options
+  network:
+    check_ports: true
+    check_connections: true
+
+    # Optional: monitor specific ports
+    # monitored_ports: [80, 443, 22, 3306]
+
+  # System monitoring options
+  system:
+    # Warning thresholds (optional)
+    thresholds:
+      cpu_warning: 80  # CPU usage in percent
+      cpu_critical: 95
+      memory_warning: 80  # RAM usage in percent
+      memory_critical: 95
+      disk_warning: 80  # Disk usage in percent
+      disk_critical: 95
